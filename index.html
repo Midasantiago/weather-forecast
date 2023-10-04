@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css"/>
     <title>Weather Forecast</title>
 </head>
 
@@ -14,8 +15,34 @@
         <h1>Weather Dashboard</h1>
     </header>
     <section id="sidebar">
-        <h2>Search for a City:</h2>
+        <form id="search-form">
+            <label for="search">Search for a City:</label>
+            <input type="text" id="search" name="search">
+            <button type="submit">Search</button>
+        </form>
+        <div id="history"></div>
     </section>
+    <section id="main">
+        <div id="today">
+            <p id="location"></p>
+            <p id="current-day"></p>
+            <img id="current-icon">
+            <ul id="current-forecast">
+                <li id="current-temp"></li>
+                <li id="current-wind"></li>
+                <li id="current-humidity"></li>
+            </ul>
+        </div>
+        <div id="future">
+            <p>5-Day Forecast</p>
+            <div id="future-forecast"></div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
