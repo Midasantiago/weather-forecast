@@ -30,7 +30,7 @@ $(function () {
     };
 
     var getLonLat = function (city) {
-        var lonLatApi = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=6c6770ea3b9bbb08d782e667037f5757';
+        var lonLatApi = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=6c6770ea3b9bbb08d782e667037f5757';
 
         fetch(lonLatApi)
             .then(function (response) {
@@ -51,7 +51,7 @@ $(function () {
     };
 
     var getCityWeather = function (lat, lon) {
-      var weatherApi = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=6c6770ea3b9bbb08d782e667037f5757&units=imperial'
+      var weatherApi = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=6c6770ea3b9bbb08d782e667037f5757&units=imperial'
 
       fetch(weatherApi)
         .then(function (response) {
@@ -69,7 +69,7 @@ $(function () {
     var displayWeather = function (data) {
         locationEl.text(data.city.name);
         currentDayEl.text(dayjs(data.list[0].dt_txt).format('MMMM D, YYYY'));
-        currentIconEl.attr('src', 'http://openweathermap.org/img/w/' + data.list[0].weather[0].icon + '.png');
+        currentIconEl.attr('src', 'https://openweathermap.org/img/w/' + data.list[0].weather[0].icon + '.png');
         currentTempEl.text('Temp: ' + data.list[0].main.temp + '°F');
         currentWindEl.text('Wind: ' + data.list[0].wind.speed + ' MPH');
         currentHumidityEl.text('Humidity: ' + data.list[0].main.humidity + ' %');
@@ -81,7 +81,7 @@ $(function () {
             dayEl.textContent = dayjs(data.list[i].dt_txt).format('MMMM D, YYYY');
 
             var iconEl = document.createElement('img');
-            iconEl.setAttribute('src', 'http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png');
+            iconEl.setAttribute('src', 'https://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png');
 
             var tempEl = document.createElement('p');
             tempEl.textContent = 'Temp: ' + data.list[i].main.temp + '°F';
