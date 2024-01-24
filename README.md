@@ -6,7 +6,7 @@ Get quick and up to date weather forecasts in your area or wherever want. View d
 
 ## ScreenShot
 
-![Full Web Page View]()
+![Full Web Page View](assets/image/Weather-SS.PNG)
     
 ## Table of Contents
     
