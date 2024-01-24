@@ -13,6 +13,42 @@ $(function () {
 
     var futureEl = $('#future-forecast');
 
+    var displayHistory = function() {
+
+        historyEl.empty();
+        
+        for (var i = 0; i < localStorage.length; i++) {
+
+            var historykey = localStorage.key(i);
+            var historyItem = localStorage.getItem(historykey);
+
+            var historyItemEl = document.createElement('p')
+
+            historyItemEl.textContent = historyItem;
+
+            historyItemEl.classList.add(
+                'bg-blue-200',
+                'text-blue-800',
+                'rounded',
+                'p-2',
+                'm-2',
+                'cursor-pointer'
+            );
+
+            historyItemEl.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log(e.target.outerText);
+                var historySearch = e.target.outerText;
+
+                searchEl.val(historySearch);
+                getLonLat(historySearch);
+                
+            })
+
+            historyEl.append(historyItemEl);
+        }
+    };
+
     var submitHandler = function (event) {
         event.preventDefault();
 
@@ -24,6 +60,8 @@ $(function () {
             localStorage.setItem(search, search);
 
             searchEl.val('');
+
+            displayHistory();
         } else {
             alert('Please enter a City');
         }
@@ -73,32 +111,42 @@ $(function () {
         currentTempEl.text('Temp: ' + data.list[0].main.temp + '°F');
         currentWindEl.text('Wind: ' + data.list[0].wind.speed + ' MPH');
         currentHumidityEl.text('Humidity: ' + data.list[0].main.humidity + ' %');
-
+    
         futureEl.empty();
-
+    
         for (var i = 7; i < data.list.length; i+=8) {
+        
+            var cardEl = document.createElement('div');
+            cardEl.className = 'bg-white p-4 m-2 rounded-md shadow-md';
+    
             var dayEl = document.createElement('p');
+            dayEl.className = 'text-lg font-semibold';
             dayEl.textContent = dayjs(data.list[i].dt_txt).format('MMMM D, YYYY');
-
+    
             var iconEl = document.createElement('img');
+            iconEl.className = 'mx-auto';
             iconEl.setAttribute('src', 'https://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png');
-
+    
             var tempEl = document.createElement('p');
             tempEl.textContent = 'Temp: ' + data.list[i].main.temp + '°F';
-
+    
             var windEl = document.createElement('p');
             windEl.textContent = 'Wind: ' + data.list[i].wind.speed + ' MPH';
-
+    
             var humidityEl = document.createElement('p');
             humidityEl.textContent = 'Humidity: ' + data.list[i].main.humidity + ' %';
-
-            futureEl.append(dayEl);
-            futureEl.append(iconEl);
-            futureEl.append(tempEl);
-            futureEl.append(windEl);
-            futureEl.append(humidityEl);
+    
+            cardEl.appendChild(dayEl);
+            cardEl.appendChild(iconEl);
+            cardEl.appendChild(tempEl);
+            cardEl.appendChild(windEl);
+            cardEl.appendChild(humidityEl);
+    
+            futureEl.append(cardEl);
         }
-    }
+    };
 
     searchFormEl.on('submit', submitHandler);
+
+    displayHistory();
 })
